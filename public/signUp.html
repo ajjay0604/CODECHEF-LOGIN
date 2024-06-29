@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="icon" href="./login.png">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+    
+    <div class="w-full md:max-w-md lg:max-w-lg border-2 content-center rounded-3xl p-6 shadow-2xl bg-white mt-5 mb-5" id="one">
+        <div class="flex justify-center">
+            <img src="./image.png" class="mt-0">
+        </div>
+        <h2 class="mt-1 text-blue-500 font-black text-2xl tracking-wide text-center">SIGN UP</h2>
+        <br>
+
+      
+        <label class="ml-1 block text-left mb-1">Name</label>
+        <div class="flex space-x-4 mb-3">
+            <div class="relative w-1/2">
+                <input type="text" id="firstName" class="w-full py-2 pl-3 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="First Name">
+            </div>
+            <div class="relative w-1/2">
+                <input type="text" id="lastName" class="w-full py-2 pl-3 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Last Name">
+            </div>
+        </div>
+
+        <label class="ml-1 block text-left mb-1">Email ID</label>
+        <div class="relative mb-3">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fa-solid fa-user"></i>
+            </span>
+            <input type="email" id="email" class="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-0" placeholder="some.mail@university.com">
+        </div>
+        <label class="ml-1 block text-left mb-1">Phone Number</label>
+        <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fa-solid fa-phone"></i>
+            </span>
+            <input type="tel" id="phoneNumber" class="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+91 ***** *****">
+        </div>
+
+   
+        <label class="ml-1 block text-left mb-1">Password</label>
+        <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" id="password" class="w-full py-2 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="**********">
+            <span class="absolute inset-y-0 right-0 flex items-center pr-3">
+                <i id="togglePassword" class="fa-regular fa-eye cursor-pointer"></i>
+            </span>
+        </div>
+
+        <div id="passwordRequirements" class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg shadow-sm">
+            <p class="text-sm font-semibold text-blue-600 mb-2">PASSWORD MUST CONTAIN</p>
+            <ul class="text-sm text-gray-700 space-y-1">
+                <li id="capital" class="flex items-center">
+                    <i class="fa-solid fa-check mr-2 text-gray-400"></i>
+                    Minimum One Capital Letter
+                </li>
+                <li id="number" class="flex items-center">
+                    <i class="fa-solid fa-check mr-2 text-gray-400"></i>
+                    Minimum One Number
+                </li>
+                <li id="special" class="flex items-center">
+                    <i class="fa-solid fa-check mr-2 text-gray-400"></i>
+                    Minimum One special Character
+                </li>
+            </ul>
+        </div>
+        
+
+        <label class="ml-1 block text-left mb-1">Confirm Password</label>
+        <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" id="confirmPassword" class="w-full py-2 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="**********">
+        </div>
+
+        <div class="flex justify-center mt-5">
+            <button id="signUpButton" class="bg-blue-400 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-5/6">SIGN UP</button>
+        </div>
+
+        <div class="text-center mt-3 mb-0">
+            <span>Already have an account?</span> &nbsp;&nbsp;
+            <a href="./index.html" class="text-blue-400">Log In</a>
+        </div>
+       
+        <!-- Display Data -->
+        <div id="displayData" class="mt-5 p-4 border rounded-lg bg-gray-50 hidden">
+            <br>
+            <h1 class="text-2xl font-bold text-blue-500 mb-4 text-center">DETAILS OF THE USER REGISTERED</h1><br>
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold">NAME</span>
+                <span id="displayName"></span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold">E-MAIL ID</span>
+                <span id="displayEmail"></span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold">PHONE NUMBER</span>
+                <span id="displayPhone"></span>
+            </div>
+        </div>
+
+        <div id="error" class="text-red-500 text-center hidden mt-2">Passwords do not match!</div>
+    </div>
+
+    <script>
+   
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+
+        document.getElementById('password').addEventListener('input', function () {
+            const value = this.value;
+            const passwordRequirements = document.getElementById('passwordRequirements');
+            const capital = document.getElementById('capital');
+            const number = document.getElementById('number');
+            const special = document.getElementById('special');
+
+            passwordRequirements.classList.remove('hidden');
+
+            if (/[A-Z]/.test(value)) {
+                capital.classList.add('text-green-500');
+                capital.classList.remove('text-gray-600');
+                capital.classList.remove('hidden');
+            } else {
+                capital.classList.add('text-gray-600');
+                capital.classList.remove('text-green-500');
+                capital.classList.remove('hidden');
+            }
+
+            if (/\d/.test(value)) {
+                number.classList.add('text-green-500');
+                number.classList.remove('text-gray-600');
+                number.classList.remove('hidden');
+            } else {
+                number.classList.add('text-gray-600');
+                number.classList.remove('text-green-500');
+                number.classList.remove('hidden');
+            }
+
+            if (/[^A-Za-z0-9]/.test(value)) {
+                special.classList.add('text-green-500');
+                special.classList.remove('text-gray-600');
+                special.classList.remove('hidden');
+            } else {
+                special.classList.add('text-gray-600');
+                special.classList.remove('text-green-500');
+                special.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('signUpButton').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const displayData = document.getElementById('displayData');
+    const displayName = document.getElementById('displayName');
+    const displayEmail = document.getElementById('displayEmail');
+    const displayPhone = document.getElementById('displayPhone');
+    const error = document.getElementById('error');
+
+    // Check if password meets criteria
+    const isPasswordValid = /[A-Z]/.test(password) && /\d/.test(password) && /[^A-Za-z0-9]/.test(password);
+
+    if (password === confirmPassword && isPasswordValid) {
+        displayName.textContent = `${firstName} ${lastName}`;
+        displayEmail.textContent = `${email}`;
+        displayPhone.textContent = `${phoneNumber}`;
+
+        localStorage.setItem('user', JSON.stringify({ firstName, lastName, email, phoneNumber, password }));
+
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phoneNumber').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('confirmPassword').value = '';
+
+        displayData.classList.remove('hidden');
+        error.classList.add('hidden');
+    } else {
+        if (!isPasswordValid) {
+            alert("Password must contain at least One Capital Letter, One Number, and One Special Character.");
+        } else {
+            error.classList.remove('hidden');
+        }
+    }
+});
+    </script>
+</body>
+
+</html>

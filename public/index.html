@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="icon" href="./login.png">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full md:max-w-md lg:max-w-lg border-2 h-auto content-center rounded-3xl p-6 shadow-2xl bg-white mt-5" id="one">
+        <div class="flex justify-center">
+            <img src="./image.png" class="w-2/6 mt-2">
+        </div>
+        <h2 class="mt-2 text-blue-500 font-black text-2xl tracking-wide text-center">LOGIN</h2>
+        <br>
+        <label class="ml-1 block text-left mb-2">Email ID</label>
+        <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fa-solid fa-user"></i>
+            </span>
+            <input type="email" id="loginEmail" class="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="some.mail@university.com">
+        </div>
+        <div class="mt-6">
+            <label class="ml-1 block text-left mb-2">Password</label>
+        <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" id="loginPassword" class="w-full py-2 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="**********">
+            <span class="absolute inset-y-0 right-0 flex items-center pr-3">
+                <i id="togglePassword" class="fa-regular fa-eye cursor-pointer"></i>
+            </span>
+        </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-4 mt-6">
+            <div class="flex items-center">
+                <input id="rememberMe" type="checkbox" class="form-checkbox h-5 w-5 text-blue-400 mt-1">
+                <label for="rememberMe" class="ml-2 block text-gray-900 text-blue-400 mt-1">Remember Me</label>
+            </div>
+            <a href="#" class="text-blue-400">Forgot Password?</a>
+        </div>
+    
+        <div class="flex justify-center mt-6">
+            <button id="loginButton" class="bg-blue-400 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-5/6 mt-2">LOG IN</button>
+        </div>
+        <br>
+        <div class="text-center kk mt-2 mb-3">
+            <span>Don't have an account?</span> &nbsp;&nbsp;
+            <a href="./signUp.html" class="text-blue-400">Sign Up</a>
+        </div>
+
+        <div id="hid">
+            <br><br><br>
+        </div>
+        <div id="loginError" class="text-red-500 text-center hidden mt-2">Invalid email or password!</div>
+
+        <div id="displayData" class="mt-5 p-4 border rounded-lg bg-gray-50 hidden">
+            <h1 class="text-2xl font-bold text-green-500 mb-4 text-center">LOGIN SUCCESSFUL</h1><br>
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold">NAME</span>
+                <span id="displayName"></span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold">E-MAIL ID</span>
+                <span id="displayEmail"></span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="font-semibold">PHONE NUMBER</span>
+                <span id="displayPhone"></span>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('loginPassword');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('loginButton').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginError = document.getElementById('loginError');
+
+            const displayData = document.getElementById('displayData');
+            const displayName = document.getElementById('displayName');
+            const displayEmail = document.getElementById('displayEmail');
+            const displayPhone = document.getElementById('displayPhone');
+
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (user && user.email === email && user.password === password) {
+          
+                displayName.textContent = `${user.firstName} ${user.lastName}`;
+                displayEmail.textContent = `${user.email}`;
+                displayPhone.textContent = `${user.phoneNumber}`;
+
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+                loginError.classList.add('hidden');
+                displayData.classList.remove('hidden');
+    
+                // Redirect to a different page or perform other actions
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
